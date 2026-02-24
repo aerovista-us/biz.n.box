@@ -859,7 +859,7 @@
         </div>
 
         <p class="small">
-          <b>Privacy note:</b> This form does not auto-submit anywhere. It generates a package you can copy/email or download as JSON.
+          <b>Privacy note:</b> When you submit, this opens an email draft to aerovista.us@outlook.com with your answers. Nothing is stored on a server unless you send the email.
         </p>
 
         <p class="small">
@@ -918,87 +918,134 @@
   }
 
   function asEmailText(data){
-    // friendly, scannable format
+    // friendly, scannable format for inbox reading
     const line = (s="") => s + "\n";
+    const business = data.businessName || "New Project";
+    const contactEmail = data.email || "";
+    const plan = data.selectedPlan || "";
+    const addons = data.selectedAddons || "";
+    const planSummary = plan
+      ? ("Plan: " + plan + (addons ? "  |  Add-ons: " + addons : ""))
+      : (addons ? ("Add-ons: " + addons) : "");
+
     let t = "";
-    t += line("Subject: Biz’n’Box Intake — " + (data.businessName || "New Project"));
+
+    // Header
+    t += line("Biz’n’Box Intake Summary");
+    t += line("────────────────────────");
+    t += line("Business: " + business);
+    t += line("Contact: " + (data.name || "") + (contactEmail ? "  <" + contactEmail + ">" : ""));
+    if (planSummary) t += line(planSummary);
     t += line("");
-    t += line("=== CONTACT ===");
-    t += line("Name: " + (data.name||""));
-    t += line("Email: " + (data.email||""));
-    t += line("Phone: " + (data.phone||""));
-    t += line("Timezone: " + (data.timezone||""));
+
+    // Contact & basics
+    t += line("CONTACT & BASICS");
+    t += line("• Name ............... " + (data.name || ""));
+    t += line("• Email .............. " + contactEmail);
+    t += line("• Phone / SMS ........ " + (data.phone || ""));
+    t += line("• Timezone ........... " + (data.timezone || ""));
+    t += line("• Business / Brand ... " + business);
+    t += line("• Stage .............. " + (data.stage || ""));
+    t += line("• Industry ........... " + (data.industry || ""));
     t += line("");
-    t += line("=== BASICS ===");
-    t += line("Business/Brand: " + (data.businessName||""));
-    t += line("Stage: " + (data.stage||""));
-    t += line("Industry: " + (data.industry||""));
+
+    // Offer
+    t += line("OFFER (WHAT THEY SELL)");
+    t += line("• Summary:");
+    t += line("  " + (data.offerSummary || "").replace(/\n/g, "\n  "));
     t += line("");
-    t += line("=== OFFER ===");
-    t += line(data.offerSummary||"");
+    t += line("• Type ............... " + (data.offerTypes || ""));
+    t += line("• Delivery mode ...... " + (data.deliveryMode || ""));
+    t += line("• Packages / tiers ... " + (data.packages || ""));
+    t += line("• Differentiator ..... " + (data.differentiator || ""));
     t += line("");
-    t += line("Offer type: " + (data.offerTypes||""));
-    t += line("Delivery mode: " + (data.deliveryMode||""));
-    t += line("Packages/tiers: " + (data.packages||""));
-    t += line("Differentiator: " + (data.differentiator||""));
+
+    // Target customers
+    t += line("TARGET CUSTOMERS");
+    t += line("• Ideal customer:");
+    t += line("  " + (data.customerDesc || "").replace(/\n/g, "\n  "));
     t += line("");
-    t += line("=== TARGET CUSTOMERS ===");
-    t += line(data.customerDesc||"");
+    t += line("• Service area ....... " + (data.serviceArea || ""));
+    t += line("• Languages .......... " + (data.languages || ""));
+    t += line("• Objections ......... " + (data.objections || ""));
+    t += line("• Proof .............. " + (data.proof || ""));
     t += line("");
-    t += line("Service area: " + (data.serviceArea||""));
-    t += line("Languages: " + (data.languages||""));
-    t += line("Objections: " + (data.objections||""));
-    t += line("Proof: " + (data.proof||""));
+
+    // Brand
+    t += line("BRAND & VOICE");
+    t += line("• Tone ............... " + (data.brandTone || ""));
+    t += line("• Colors ............. " + (data.brandColors || ""));
+    t += line("• Logo status ........ " + (data.logoStatus || ""));
+    t += line("• Assets link ........ " + (data.assetsLink || ""));
+    t += line("• Style examples:");
+    t += line("  " + (data.examples || "").replace(/\n/g, "\n  "));
     t += line("");
-    t += line("=== BRAND ===");
-    t += line("Tone: " + (data.brandTone||""));
-    t += line("Colors: " + (data.brandColors||""));
-    t += line("Logo status: " + (data.logoStatus||""));
-    t += line("Assets link: " + (data.assetsLink||""));
-    t += line("Examples: " + (data.examples||""));
+
+    // Operations
+    t += line("OPERATIONS & WORKFLOW");
+    t += line("• Current process:");
+    t += line("  " + (data.currentProcess || "").replace(/\n/g, "\n  "));
     t += line("");
-    t += line("=== OPERATIONS ===");
-    t += line("Current process: " + (data.currentProcess||""));
-    t += line("Ideal process: " + (data.idealProcess||""));
-    t += line("Tools used: " + ((data.toolsUsed||[]).join(", ")));
-    t += line("Team: " + (data.team||""));
-    t += line("Training audience: " + (data.trainingAudience||""));
+    t += line("• Ideal process:");
+    t += line("  " + (data.idealProcess || "").replace(/\n/g, "\n  "));
     t += line("");
-    t += line("=== PRICING & POLICIES ===");
-    t += line("Price range: " + (data.priceRange||""));
-    t += line("Payment methods: " + (data.paymentMethods||""));
-    t += line("Refunds/cancel: " + (data.refunds||""));
-    t += line("Legal needs: " + (data.legal||""));
+    t += line("• Tools used ......... " + ((data.toolsUsed || []).join(", ")));
+    t += line("• Team ............... " + (data.team || ""));
+    t += line("• Training audience .. " + (data.trainingAudience || ""));
     t += line("");
-    t += line("=== WEBSITE ===");
-    t += line("Domain status: " + (data.domain||""));
-    t += line("Domain name: " + (data.domainName||""));
-    t += line("Pages/sections: " + (data.pagesNeeded||""));
-    t += line("Core goals: " + ((data.siteGoals||[]).join(", ")));
-    t += line("Integrations: " + (data.integrations||""));
-    t += line("Content readiness: " + (data.contentReady||""));
+
+    // Pricing & policies
+    t += line("PRICING, PAYMENTS & POLICIES");
+    t += line("• Price range ........ " + (data.priceRange || ""));
+    t += line("• Payment methods .... " + (data.paymentMethods || ""));
+    t += line("• Refunds / cancel ... " + (data.refunds || ""));
+    t += line("• Legal needs ........ " + (data.legal || ""));
     t += line("");
-    t += line("=== TOOLKIT REQUESTS ===");
-    t += line("Toolkit items: " + ((data.toolkit||[]).join(", ")));
-    t += line("Toolkit notes: " + (data.toolkitNotes||""));
+
+    // Website
+    t += line("WEBSITE REQUIREMENTS");
+    t += line("• Domain status ...... " + (data.domain || ""));
+    t += line("• Domain name ........ " + (data.domainName || ""));
+    t += line("• Pages / sections ... " + (data.pagesNeeded || ""));
+    t += line("• Core goals ......... " + ((data.siteGoals || []).join(", ")));
+    t += line("• Integrations ....... " + (data.integrations || ""));
+    t += line("• Content ready? ..... " + (data.contentReady || ""));
     t += line("");
-    t += line("=== TRAINING ===");
-    t += line("Preferred formats: " + ((data.trainingFormat||[]).join(", ")));
-    t += line("Topics: " + (data.trainingTopics||""));
+
+    // Toolkit
+    t += line("TOOLKIT / DOCUMENT PACK");
+    t += line("• Toolkit items ...... " + ((data.toolkit || []).join(", ")));
+    t += line("• Toolkit notes ...... " + (data.toolkitNotes || ""));
     t += line("");
-    t += line("=== TIMELINE & SUCCESS ===");
-    t += line("Launch date: " + (data.launchDate||""));
-    t += line("Budget: " + (data.budget||""));
-    t += line("Constraints: " + (data.constraints||""));
-    t += line("Success at 30 days: " + (data.success||""));
+
+    // Training
+    t += line("TRAINING MATERIALS");
+    t += line("• Preferred formats .. " + ((data.trainingFormat || []).join(", ")));
+    t += line("• Topics:");
+    t += line("  " + (data.trainingTopics || "").replace(/\n/g, "\n  "));
     t += line("");
-    t += line("=== ACCESS & APPROVALS ===");
-    t += line("Accounts available: " + ((data.access||[]).join(", ")));
-    t += line("Approver: " + (data.approver||""));
-    t += line("Notes: " + (data.notes||""));
+
+    // Timeline & success
+    t += line("TIMELINE, BUDGET & SUCCESS");
+    t += line("• Launch date ........ " + (data.launchDate || ""));
+    t += line("• Budget range ....... " + (data.budget || ""));
+    t += line("• Constraints ........ " + (data.constraints || ""));
+    t += line("• Success @ 30 days .. " + (data.success || ""));
     t += line("");
-    t += line("---");
+
+    // Access & approvals
+    t += line("ACCESS, APPROVALS & NOTES");
+    t += line("• Accounts available . " + ((data.access || []).join(", ")));
+    t += line("• Approver ........... " + (data.approver || ""));
+    t += line("• Notes:");
+    t += line("  " + (data.notes || "").replace(/\n/g, "\n  "));
+    t += line("");
+
+    // Footer meta
+    t += line("────────────────────────");
     t += line("Generated: " + (data._meta && data._meta.generatedAt ? data._meta.generatedAt : ""));
+    t += line("Form: biznbx_intake_v1");
+
     return t;
   }
 
@@ -1185,30 +1232,15 @@
   form.addEventListener("submit", (e)=>{
     e.preventDefault();
     show("none");
-    if(!requiredValid(form)){ show("warn"); return; }
-    const data = getValues(form);
-    // Default action = download both
-    const slug = (data.businessName || "biznbx").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");
-    download(`biznbx_intake__${slug}.json`, JSON.stringify(data, null, 2), "application/json");
-    download(`biznbx_intake__${slug}.txt`, asEmailText(data), "text/plain");
-    show("ok");
-  });
-if(!requiredValid(form)){ show("warn"); return; }
-    const data = getValues(form);
-    const text = asEmailText(data);
-    try{
-      await navigator.clipboard.writeText(text);
-      show("ok");
-    }catch(err){
-      // fallback
-      download("biznbx_intake_copy.txt", text, "text/plain");
-      show("ok");
+    if(!requiredValid(form)){ 
+      show("warn"); 
+      return; 
     }
-  });
-if(!requiredValid(form)){ show("warn"); return; }
     const data = getValues(form);
-    const slug = (data.businessName || "biznbx").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");
-    download(`biznbx_intake__${slug}.json`, JSON.stringify(data, null, 2), "application/json");
+    const emailText = asEmailText(data);
+    const subject = encodeURIComponent("Biz’n’Box Intake — " + (data.businessName || "New Project"));
+    const body = encodeURIComponent(emailText);
+    window.location.href = `mailto:aerovista.us@outlook.com?subject=${subject}&body=${body}`;
     show("ok");
   });
 
