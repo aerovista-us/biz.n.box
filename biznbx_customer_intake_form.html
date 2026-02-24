@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biz’n’Box Intake Form | AeroVista</title>
+  <meta name="description" content="Biz’n’Box customer intake form — capture everything needed for a successful business launch system (plan, tools, training, website)." />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#070a0f;
+      --card: rgba(255,255,255,.06);
+      --border: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --faint: rgba(255,255,255,.55);
+      --green:#10b981;
+      --cyan:#06b6d4;
+      --amber:#f59e0b;
+      --pink:#ec4899;
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --r: 18px;
+      --r2: 24px;
+      --ring: 0 0 0 4px rgba(16,185,129,.18);
+    }
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      color:var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(6,182,212,.12), transparent 55%),
+        radial-gradient(1000px 600px at 85% 30%, rgba(16,185,129,.10), transparent 55%),
+        radial-gradient(900px 650px at 55% 90%, rgba(236,72,153,.08), transparent 60%),
+        var(--bg);
+    }
+    a{ color: rgba(255,255,255,.88); text-decoration:none; }
+    a:hover{ color:#fff; }
+
+    header{
+      position: sticky; top:0; z-index:20;
+      background: linear-gradient(180deg, rgba(7,10,15,.92), rgba(7,10,15,.70));
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    .bar{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: .9rem 1.1rem;
+      display:flex;
+      gap: 1rem;
+      align-items:center;
+      justify-content: space-between;
+    }
+    .brand{
+      font-family:"Chakra Petch", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      letter-spacing:.04em;
+      display:flex; align-items:center; gap:.7rem;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      padding:.35rem .65rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.82);
+      font-size: .82rem;
+      white-space: nowrap;
+    }
+    .dot{ width:.55rem;height:.55rem;border-radius:999px;background:var(--green);
+      box-shadow: 0 0 0 4px rgba(16,185,129,.15); }
+
+    main{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.25rem 1.1rem 3rem;
+    }
+    .hero{
+      padding: 1.3rem 0 1.1rem;
+    }
+    h1{
+      margin:.2rem 0 .5rem;
+      font-family:"Chakra Petch", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      letter-spacing:.01em;
+      font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+    }
+    .lead{
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 78ch;
+      margin: 0;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 320px;
+      gap: 1rem;
+      align-items:start;
+      margin-top: 1rem;
+    }
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      border-radius: var(--r2);
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .hd{
+      padding: 1.1rem 1.1rem .85rem;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(135deg, rgba(16,185,129,.10), rgba(6,182,212,.08));
+    }
+    .card .hd h2{
+      margin:0;
+      font-size: 1.1rem;
+      letter-spacing:.01em;
+    }
+    .card .hd p{
+      margin:.35rem 0 0;
+      color: var(--faint);
+      line-height:1.5;
+      font-size:.95rem;
+    }
+    .card .bd{ padding: 1.1rem; }
+
+    .section{
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      padding: 1rem;
+      margin-bottom: .9rem;
+    }
+    .section h3{
+      margin:0 0 .45rem;
+      font-size: 1rem;
+      letter-spacing:.01em;
+    }
+    .section p{
+      margin:0 0 .75rem;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: .95rem;
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .85rem;
+    }
+    @media (max-width: 720px){ .row{ grid-template-columns: 1fr; } }
+
+    label{
+      display:block;
+      margin: 0 0 .35rem;
+      color: rgba(255,255,255,.86);
+      font-size: .92rem;
+    }
+    .hint{ color: var(--faint); font-size: .86rem; margin-top:.35rem; line-height:1.4; }
+    input[type="text"], input[type="email"], input[type="url"], input[type="tel"], input[type="number"], textarea, select{
+      width:100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.22);
+      color: var(--text);
+      padding: .85rem .9rem;
+      outline: none;
+      font-size: .95rem;
+    }
+    textarea{ min-height: 110px; resize: vertical; }
+    input:focus, textarea:focus, select:focus{ box-shadow: var(--ring); border-color: rgba(16,185,129,.45); }
+
+    .choices{
+      display:grid;
+      gap:.55rem;
+      margin-top:.35rem;
+    }
+    .choice{
+      display:flex;
+      gap:.55rem;
+      align-items:flex-start;
+      color: rgba(255,255,255,.85);
+      line-height:1.4;
+      font-size: .95rem;
+      user-select:none;
+    }
+    .choice input{ margin-top:.2rem; }
+
+    .btnrow{
+      display:flex; gap:.65rem; flex-wrap:wrap;
+      align-items:center;
+      margin-top: .95rem;
+    }
+    button{
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.92);
+      padding: .82rem 1.05rem;
+      border-radius: 999px;
+      cursor:pointer;
+      font-weight:600;
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+    }
+    button.primary{
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      border-color: rgba(255,255,255,.10);
+    }
+    button:hover{ transform: translateY(-1px); filter: brightness(1.02); box-shadow: 0 18px 44px rgba(0,0,0,.35); }
+    button:focus{ outline:none; box-shadow: var(--ring), 0 18px 44px rgba(0,0,0,.35); }
+
+    .side{
+      position: sticky;
+      top: 88px;
+      align-self:start;
+    }
+    .side .bd{ padding: 1rem 1.1rem 1.1rem; }
+    .toc{
+      display:grid;
+      gap:.45rem;
+      margin-top:.65rem;
+    }
+    .toc a{
+      padding:.55rem .65rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.86);
+      font-size:.92rem;
+    }
+    .toc a:hover{ background: rgba(255,255,255,.08); }
+    .small{
+      margin-top:.8rem;
+      color: var(--muted);
+      font-size: .9rem;
+      line-height:1.55;
+    }
+    .ok{
+      display:none;
+      margin-top:.75rem;
+      padding:.75rem .85rem;
+      border-radius: 14px;
+      border: 1px solid rgba(16,185,129,.35);
+      background: rgba(16,185,129,.12);
+      color: rgba(255,255,255,.90);
+    }
+    .warn{
+      display:none;
+      margin-top:.75rem;
+      padding:.75rem .85rem;
+      border-radius: 14px;
+      border: 1px solid rgba(245,158,11,.35);
+      background: rgba(245,158,11,.10);
+      color: rgba(255,255,255,.90);
+    }
+    .req{ color: var(--pink); font-weight:700; margin-left:.25rem; }
+
+    footer{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.2rem 1.1rem 2.2rem;
+      color: var(--faint);
+    }
+    .foot{
+      border-radius: var(--r2);
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: 0 18px 45px rgba(0,0,0,.25);
+      padding: .95rem 1.05rem;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .foot-brand{
+      font-family:"Chakra Petch", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      letter-spacing:.04em;
+      color: rgba(255,255,255,.92);
+    }
+    .foot-sub{
+      margin-top:.15rem;
+      font-size:.9rem;
+      color: rgba(255,255,255,.62);
+    }
+    @media (max-width: 720px){
+      .foot{ flex-direction: column; align-items:flex-start; }
+    }
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: .86rem;
+      padding: .08rem .4rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.86);
+      white-space: nowrap;
+    }
+  
+    /* Customer-ready header/footer polish */
+    .brandwrap{ display:flex; align-items:center; gap:.7rem; padding:.15rem .25rem; }
+    .mark{ width:34px; height:34px; filter: drop-shadow(0 10px 22px rgba(0,0,0,.35)); }
+    .brandtext{ display:flex; flex-direction:column; line-height:1.05; }
+    .brandtext .t1{
+      font-family:"Chakra Petch", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      letter-spacing:.06em;
+      font-weight:700;
+      font-size:.98rem;
+      color: rgba(255,255,255,.96);
+    }
+    .brandtext .t2{
+      margin-top:.2rem;
+      font-size:.78rem;
+      color: rgba(255,255,255,.62);
+      letter-spacing:.02em;
+    }
+    .right{ display:flex; align-items:center; gap:.55rem; flex-wrap:wrap; justify-content:flex-end; }
+
+    .divider{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent);
+      margin: .9rem 0 1.05rem;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      padding:.35rem .6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.80);
+      font-size:.85rem;
+      white-space: nowrap;
+    }
+    .badge svg{ width: 15px; height: 15px; opacity:.95; }
+    .topnote{
+      margin-top:.75rem;
+      display:flex;
+      gap:.55rem;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+  </style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <div class="brand">
+      <span class="brandwrap">
+        <svg class="mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="var(--green)"/>
+      <stop offset="1" stop-color="var(--cyan)"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="var(--amber)"/>
+      <stop offset="1" stop-color="var(--pink)"/>
+    </linearGradient>
+  </defs>
+  <path d="M10 20c0-4 3-7 7-7h18c7 0 12 5 12 12v20c0 4-3 7-7 7H22c-7 0-12-5-12-12V20Z"
+        fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.18)"/>
+  <path d="M18 24h20c3 0 6 3 6 6v6c0 3-3 6-6 6H24c-3 0-6-3-6-6V24Z"
+        fill="url(#g1)" opacity=".9"/>
+  <path d="M20 41h24c2 0 3 2 2 4-2 4-7 8-14 8-7 0-12-4-14-8-1-2 0-4 2-4Z"
+        fill="url(#g2)" opacity=".85"/>
+  <path d="M22.5 30.5h17" stroke="rgba(7,10,15,.55)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M22.5 35.5h12" stroke="rgba(7,10,15,.55)" stroke-width="3" stroke-linecap="round"/>
+</svg>
+        <span class="brandtext">
+          <span class="t1">Biz’n’Box</span>
+          <span class="t2">Customer Intake</span>
+        </span>
+      </span>
+      <span class="chip"><span class="dot" aria-hidden="true"></span>Launch system intake</span>
+    </div>
+    <div class="right">
+      <span class="chip" title="Average time to complete">~15–25 min</span>
+      <span class="chip" id="planChip" title="Selected plan (from landing)">Plan: —</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>Biz’n’Box Intake Form</h1>
+    <p class="lead">
+      This form captures what we need to build your full launch system: <b>business blueprint</b>, <b>toolkit & documents</b>,
+      <b>training materials</b>, and your <b>website</b>. You can skip anything you’re unsure about — just answer as best as you can.
+    </p>
+    <div class="topnote" aria-label="What this produces">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14"/><path d="M8 7h8M8 11h8M8 15h6"/></svg>Blueprint</span>
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Toolkit pack</span>
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h12v17H6z"/><path d="M9 6h6M9 10h6M9 14h4"/></svg>Training materials</span>
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18"/><path d="M4 7h16"/><path d="M6 17h12"/></svg>Website requirements</span>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+  </section>
+
+  <div class="grid">
+    <form id="intake" class="card" autocomplete="on">
+      <div class="hd">
+        <h2>Project Details</h2>
+        <p>Answer in your own words. The more context you give, the sharper the deliverables will be.</p>
+      </div>
+      <div class="bd">
+
+
+        <!-- 0. Package -->
+        <div class="section" id="sec-package">
+          <h3>0) Package Selection</h3>
+          <p>Pre-filled from the plan you chose. You can change it here if needed.</p>
+
+          <div class="row">
+            <div>
+              <label for="selectedPlan">Selected plan</label>
+              <select id="selectedPlan" name="selectedPlan">
+                <option value="">Select…</option>
+                <option>Lite</option>
+                <option>Core</option>
+                <option>Pro</option>
+              </select>
+              <div class="hint">Changing this updates recommended toolkit/training defaults (you can still edit anything below).</div>
+            </div>
+            <div>
+              <label for="selectedAddons">Add-ons</label>
+              <input id="selectedAddons" name="selectedAddons" type="text" placeholder="payments, booking, ecommerce..." />
+              <div class="hint">Comma-separated. We'll also translate this into the relevant checkboxes/fields below.</div>
+            </div>
+          </div>
+
+          <div id="prefillPill" class="ok" style="display:block;margin-top:.85rem;">
+            Prefilled from your selections — scroll down to fill in the details.
+          </div>
+        </div>
+
+
+        <!-- 1. Basics -->
+        <div class="section" id="sec-basics">
+          <h3>1) Business Basics</h3>
+          <p>Who you are, what you're launching, and how we should contact you.</p>
+
+          <div class="row">
+            <div>
+              <label for="name">Your name<span class="req">*</span></label>
+              <input id="name" name="name" type="text" required placeholder="Your name" />
+            </div>
+            <div>
+              <label for="email">Email<span class="req">*</span></label>
+              <input id="email" name="email" type="email" required placeholder="you@company.com" />
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:.85rem;">
+            <div>
+              <label for="phone">Phone / SMS (optional)</label>
+              <input id="phone" name="phone" type="tel" placeholder="(xxx) xxx-xxxx" />
+            </div>
+            <div>
+              <label for="timezone">Timezone</label>
+              <select id="timezone" name="timezone">
+                <option value="">Select…</option>
+                <option>Pacific (PT)</option><option>Mountain (MT)</option><option>Central (CT)</option><option>Eastern (ET)</option>
+                <option>Alaska</option><option>Hawaii</option><option>UTC</option><option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-top:.85rem;">
+            <label for="businessName">Business / brand name (or working name)<span class="req">*</span></label>
+            <input id="businessName" name="businessName" type="text" required placeholder="Biz name or working title" />
+          </div>
+
+          <div class="row" style="margin-top:.85rem;">
+            <div>
+              <label for="stage">Current stage<span class="req">*</span></label>
+              <select id="stage" name="stage" required>
+                <option value="">Select…</option>
+                <option>Idea stage (not launched yet)</option>
+                <option>Pre-launch (building pieces now)</option>
+                <option>Already selling (needs system + polish)</option>
+                <option>Rebrand / pivot</option>
+              </select>
+            </div>
+            <div>
+              <label for="industry">Industry / category</label>
+              <input id="industry" name="industry" type="text" placeholder="e.g., coaching, trades, ecommerce, local services" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Offer -->
+        <div class="section" id="sec-offer">
+          <h3>2) Your Offer (What you sell)</h3>
+          <p>We need to understand the product/service so the blueprint + toolkit fit reality.</p>
+
+          <label for="offerSummary">Describe what you sell (in plain language)<span class="req">*</span></label>
+          <textarea id="offerSummary" name="offerSummary" required placeholder="Example: I install mini-splits for homeowners in my county. I want 3 package options."></textarea>
+
+          <div class="row" style="margin-top:.85rem;">
+            <div>
+              <label for="offerTypes">What type is it?</label>
+              <select id="offerTypes" name="offerTypes">
+                <option value="">Select…</option>
+                <option>Local service (in-person)</option>
+                <option>Remote service</option>
+                <option>Digital product</option>
+                <option>Physical products / ecommerce</option>
+                <option>Membership / subscription</option>
+                <option>Course / training program</option>
+                <option>Consulting / coaching</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="deliveryMode">How do you deliver it?</label>
+              <input id="deliveryMode" name="deliveryMode" type="text" placeholder="On-site visits, Zoom calls, shipping, downloads..." />
+            </div>
+          </div>
+
+          <label for="packages" style="margin-top:.85rem;">List your packages or tiers (if known)</label>
+          <textarea id="packages" name="packages" placeholder="Tier name + what’s included + target price (if you know)."></textarea>
+
+          <label for="differentiator" style="margin-top:.85rem;">Why should customers pick you?</label>
+          <textarea id="differentiator" name="differentiator" placeholder="Speed, quality, guarantee, vibe, expertise, location, special method, etc."></textarea>
+        </div>
+
+        <!-- 3. Target customers -->
+        <div class="section" id="sec-customers">
+          <h3>3) Target Customers</h3>
+          <p>We’ll build messaging, scripts, and training around your customer reality.</p>
+
+          <label for="customerDesc">Who is your ideal customer?<span class="req">*</span></label>
+          <textarea id="customerDesc" name="customerDesc" required placeholder="Age, role, location, what they want, what they struggle with."></textarea>
+
+          <div class="row" style="margin-top:.85rem;">
+            <div>
+              <label for="serviceArea">Service area / shipping region</label>
+              <input id="serviceArea" name="serviceArea" type="text" placeholder="City/County/State/Country or 'Worldwide'." />
+            </div>
+            <div>
+              <label for="languages">Languages you support</label>
+              <input id="languages" name="languages" type="text" placeholder="English, Spanish..." />
+            </div>
+          </div>
+
+          <label for="objections" style="margin-top:.85rem;">Top objections customers have (price, trust, timing, etc.)</label>
+          <textarea id="objections" name="objections" placeholder="What do people hesitate about before buying?"></textarea>
+
+          <label for="proof" style="margin-top:.85rem;">Proof you can use (reviews, photos, results, case studies)</label>
+          <textarea id="proof" name="proof" placeholder="Links or descriptions of proof you have (or want to collect)."></textarea>
+        </div>
+
+        <!-- 4. Brand + voice -->
+        <div class="section" id="sec-brand">
+          <h3>4) Brand & Voice</h3>
+          <p>So the website + templates match your style and don’t feel generic.</p>
+
+          <div class="row">
+            <div>
+              <label for="brandTone">Brand tone</label>
+              <select id="brandTone" name="brandTone">
+                <option value="">Select…</option>
+                <option>Professional / corporate</option>
+                <option>Friendly / approachable</option>
+                <option>Bold / edgy</option>
+                <option>Luxury / premium</option>
+                <option>Down-to-earth / local</option>
+                <option>Playful / fun</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="brandColors">Preferred colors</label>
+              <input id="brandColors" name="brandColors" type="text" placeholder="e.g., black + gold, teal + orange" />
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:.85rem;">
+            <div>
+              <label for="logoStatus">Logo status</label>
+              <select id="logoStatus" name="logoStatus">
+                <option value="">Select…</option>
+                <option>I have a logo</option>
+                <option>I have a rough logo</option>
+                <option>I need a logo</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div>
+              <label for="assetsLink">Assets link (Drive/Dropbox/etc.)</label>
+              <input id="assetsLink" name="assetsLink" type="url" placeholder="https://..." />
+              <div class="hint">Logos, photos, videos, docs, etc.</div>
+            </div>
+          </div>
+
+          <label for="examples" style="margin-top:.85rem;">Websites/brands you like (style references)</label>
+          <textarea id="examples" name="examples" placeholder="Paste links and what you like about them."></textarea>
+        </div>
+
+        <!-- 5. Operations -->
+        <div class="section" id="sec-ops">
+          <h3>5) Operations & Workflow</h3>
+          <p>We’ll design the internal system: intake → delivery → follow-up.</p>
+
+          <label for="currentProcess">Describe your current process (if any)</label>
+          <textarea id="currentProcess" name="currentProcess" placeholder="How do leads reach you, how do you quote, how do you deliver, how do you get paid?"></textarea>
+
+          <label for="idealProcess" style="margin-top:.85rem;">Describe your ideal process</label>
+          <textarea id="idealProcess" name="idealProcess" placeholder="If everything worked perfectly, how would it flow?"></textarea>
+
+          <div class="row" style="margin-top:.85rem;">
+            <div>
+              <label>What tools do you already use?</label>
+              <div class="choices" role="group" aria-label="Tools used">
+                <label class="choice"><input type="checkbox" name="toolsUsed" value="Google Workspace" />Google Workspace</label>
+                <label class="choice"><input type="checkbox" name="toolsUsed" value="Microsoft 365" />Microsoft 365</label>
+                <label class="choice"><input type="checkbox" name="toolsUsed" value="Square" />Square</label>
+                <label class="choice"><input type="checkbox" name="toolsUsed" value="Stripe" />Stripe</label>
+                <label class="choice"><input type="checkbox" name="toolsUsed" value="QuickBooks" />QuickBooks</label>
+                <label class="choice"><input type="checkbox" name="toolsUsed" value="Calendly" />Calendly</label>
+                <label class="choice"><input type="checkbox" name="toolsUsed" value="Shopify" />Shopify</label>
+                <label class="choice"><input type="checkbox" name="toolsUsed" value="Other" />Other</label>
+              </div>
+            </div>
+            <div>
+              <label for="team">Team size & roles</label>
+              <textarea id="team" name="team" placeholder="Just you, plus a helper, VA, sales, tech…"></textarea>
+            </div>
+          </div>
+
+          <label for="trainingAudience" style="margin-top:.85rem;">Who will use the training materials?</label>
+          <textarea id="trainingAudience" name="trainingAudience" placeholder="Just you, new hires, contractors, partners, customers, etc."></textarea>
+        </div>
+
+        <!-- 6. Pricing + money -->
+        <div class="section" id="sec-pricing">
+          <h3>6) Pricing, Payments, and Policies</h3>
+          <p>This influences your templates (contracts, invoices, refunds) and your site (checkout/booking).</p>
+
+          <div class="row">
+            <div>
+              <label for="priceRange">Typical price range</label>
+              <input id="priceRange" name="priceRange" type="text" placeholder="$250–$1,500, or $99/mo, etc." />
+            </div>
+            <div>
+              <label for="paymentMethods">Payment methods you want</label>
+              <input id="paymentMethods" name="paymentMethods" type="text" placeholder="Card, ACH, Cash, invoice, subscription…" />
+            </div>
+          </div>
+
+          <label for="refunds" style="margin-top:.85rem;">Refund / cancellation expectations</label>
+          <textarea id="refunds" name="refunds" placeholder="Do you allow refunds? deposits? rescheduling? warranties?"></textarea>
+
+          <label for="legal" style="margin-top:.85rem;">Legal needs (if any)</label>
+          <textarea id="legal" name="legal" placeholder="Contracts, disclaimers, age restrictions, compliance, licenses, insurance, etc."></textarea>
+        </div>
+
+        <!-- 7. Website needs -->
+        <div class="section" id="sec-website">
+          <h3>7) Website Requirements</h3>
+          <p>We’ll build the site to match your offer and the system behind it.</p>
+
+          <div class="row">
+            <div>
+              <label for="domain">Domain</label>
+              <select id="domain" name="domain">
+                <option value="">Select…</option>
+                <option>I already own a domain</option>
+                <option>I need a new domain</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div>
+              <label for="domainName">Domain name (if known)</label>
+              <input id="domainName" name="domainName" type="text" placeholder="example.com" />
+            </div>
+          </div>
+
+          <label for="pagesNeeded" style="margin-top:.85rem;">Pages / sections you need</label>
+          <textarea id="pagesNeeded" name="pagesNeeded" placeholder="Home, Services, Pricing, About, Contact, Portfolio, FAQ, Blog, Shop, Booking, etc."></textarea>
+
+          <div class="row" style="margin-top:.85rem;">
+            <div>
+              <label>Core site goals</label>
+              <div class="choices" role="group" aria-label="Site goals">
+                <label class="choice"><input type="checkbox" name="siteGoals" value="Get leads" />Get leads</label>
+                <label class="choice"><input type="checkbox" name="siteGoals" value="Sell online" />Sell online</label>
+                <label class="choice"><input type="checkbox" name="siteGoals" value="Booking" />Booking/appointments</label>
+                <label class="choice"><input type="checkbox" name="siteGoals" value="Collect emails" />Collect emails</label>
+                <label class="choice"><input type="checkbox" name="siteGoals" value="Show portfolio" />Show portfolio</label>
+                <label class="choice"><input type="checkbox" name="siteGoals" value="Educate" />Educate (blog/resources)</label>
+                <label class="choice"><input type="checkbox" name="siteGoals" value="Other" />Other</label>
+              </div>
+            </div>
+            <div>
+              <label for="integrations">Integrations needed</label>
+              <textarea id="integrations" name="integrations" placeholder="Payments, booking, CRM, email marketing, analytics, chat, reviews, maps…"></textarea>
+            </div>
+          </div>
+
+          <label for="contentReady" style="margin-top:.85rem;">Do you already have content (copy/photos)?</label>
+          <select id="contentReady" name="contentReady">
+            <option value="">Select…</option>
+            <option>Yes, mostly ready</option>
+            <option>Some, but needs help</option>
+            <option>No, I need copy + guidance</option>
+          </select>
+        </div>
+
+        <!-- 8. Toolkit/documents needed -->
+        <div class="section" id="sec-docs">
+          <h3>8) Tools & Document Pack (What you want included)</h3>
+          <p>Select what you want us to build into your Biz’n’Box toolkit.</p>
+
+          <div class="row">
+            <div>
+              <label>Toolkit items</label>
+              <div class="choices" role="group" aria-label="Toolkit items">
+                <label class="choice"><input type="checkbox" name="toolkit" value="Client intake form" />Client intake form</label>
+                <label class="choice"><input type="checkbox" name="toolkit" value="Proposal/quote template" />Proposal/quote template</label>
+                <label class="choice"><input type="checkbox" name="toolkit" value="Invoice template" />Invoice template</label>
+                <label class="choice"><input type="checkbox" name="toolkit" value="Contract/terms template" />Contract/terms template</label>
+                <label class="choice"><input type="checkbox" name="toolkit" value="SOPs (how to deliver)" />SOPs (how to deliver)</label>
+                <label class="choice"><input type="checkbox" name="toolkit" value="Checklist (delivery)" />Checklist (delivery)</label>
+                <label class="choice"><input type="checkbox" name="toolkit" value="Onboarding checklist (team)" />Onboarding checklist (team)</label>
+                <label class="choice"><input type="checkbox" name="toolkit" value="Email templates" />Email templates</label>
+                <label class="choice"><input type="checkbox" name="toolkit" value="Call scripts" />Call scripts</label>
+                <label class="choice"><input type="checkbox" name="toolkit" value="Content calendar" />Content calendar</label>
+                <label class="choice"><input type="checkbox" name="toolkit" value="KPI tracker" />KPI tracker</label>
+                <label class="choice"><input type="checkbox" name="toolkit" value="Other" />Other</label>
+              </div>
+            </div>
+            <div>
+              <label for="toolkitNotes">Toolkit notes (what you specifically want)</label>
+              <textarea id="toolkitNotes" name="toolkitNotes" placeholder="Any special clauses, policies, or operational details to include?"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Training needs -->
+        <div class="section" id="sec-training">
+          <h3>9) Training Materials</h3>
+          <p>We’ll produce training content (short lessons, guides, scripts) so the system can run without you reinventing it.</p>
+
+          <div class="row">
+            <div>
+              <label>Training format preference</label>
+              <div class="choices" role="group" aria-label="Training format">
+                <label class="choice"><input type="checkbox" name="trainingFormat" value="Written SOPs" />Written SOPs</label>
+                <label class="choice"><input type="checkbox" name="trainingFormat" value="Checklists" />Checklists</label>
+                <label class="choice"><input type="checkbox" name="trainingFormat" value="Slide deck" />Slide deck</label>
+                <label class="choice"><input type="checkbox" name="trainingFormat" value="Short video scripts" />Short video scripts</label>
+                <label class="choice"><input type="checkbox" name="trainingFormat" value="Quizzes" />Quizzes</label>
+                <label class="choice"><input type="checkbox" name="trainingFormat" value="Other" />Other</label>
+              </div>
+            </div>
+            <div>
+              <label for="trainingTopics">What should the training cover?</label>
+              <textarea id="trainingTopics" name="trainingTopics" placeholder="How to handle leads, how to deliver, quality checks, tools, customer service, etc."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. Timeline + constraints -->
+        <div class="section" id="sec-timeline">
+          <h3>10) Timeline, Budget, and Constraints</h3>
+          <p>So we scope it correctly and don’t build the wrong thing.</p>
+
+          <div class="row">
+            <div>
+              <label for="launchDate">Desired launch date</label>
+              <input id="launchDate" name="launchDate" type="text" placeholder="e.g., March 15, or 'ASAP'" />
+            </div>
+            <div>
+              <label for="budget">Budget range</label>
+              <select id="budget" name="budget">
+                <option value="">Select…</option>
+                <option>Under $1k</option>
+                <option>$1k–$3k</option>
+                <option>$3k–$7k</option>
+                <option>$7k–$15k</option>
+                <option>$15k+</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="constraints" style="margin-top:.85rem;">Constraints / non-negotiables</label>
+          <textarea id="constraints" name="constraints" placeholder="Must be mobile-first, must accept payments, must keep current domain, must be HIPAA-aware, etc."></textarea>
+
+          <label for="success" style="margin-top:.85rem;">What does “success” look like 30 days after launch?</label>
+          <textarea id="success" name="success" placeholder="Example: 20 leads, 5 sales, consistent process, onboarding done, etc."></textarea>
+        </div>
+
+        <!-- 11. Access + approvals -->
+        <div class="section" id="sec-access">
+          <h3>11) Access, Approvals, and Next Steps</h3>
+          <p>We’ll only request access after kickoff — this just tells us what will be needed.</p>
+
+          <div class="row">
+            <div>
+              <label>Accounts you can provide (later)</label>
+              <div class="choices" role="group" aria-label="Accounts">
+                <label class="choice"><input type="checkbox" name="access" value="Domain registrar" />Domain registrar</label>
+                <label class="choice"><input type="checkbox" name="access" value="Google Workspace/M365" />Google Workspace/M365</label>
+                <label class="choice"><input type="checkbox" name="access" value="Payments (Square/Stripe)" />Payments (Square/Stripe)</label>
+                <label class="choice"><input type="checkbox" name="access" value="Social accounts" />Social accounts</label>
+                <label class="choice"><input type="checkbox" name="access" value="Existing website hosting" />Existing website hosting</label>
+                <label class="choice"><input type="checkbox" name="access" value="Analytics" />Analytics</label>
+              </div>
+            </div>
+            <div>
+              <label for="approver">Who approves final copy/design?</label>
+              <input id="approver" name="approver" type="text" placeholder="Name + role" />
+              <div class="hint">If it’s you, just say “me.”</div>
+
+              <label for="notes" style="margin-top:.85rem;">Anything else we should know?</label>
+              <textarea id="notes" name="notes" placeholder="Extra context, concerns, special requirements, links, etc."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="btnrow">
+          <button type="submit" class="primary">Submit Intake & Download Package</button>
+        </div>
+<div id="ok" class="ok">Saved. Your intake package is ready — copied/downloaded successfully.</div>
+        <div id="warn" class="warn">Please fill the required fields (marked with *) before generating.</div>
+
+      </div>
+    </form>
+
+    <aside class="card side" aria-label="Form navigation and tips">
+      <div class="hd">
+        <h2>Jump to section</h2>
+        <p>Use this to move fast. Tip: hit <span class="kbd">Ctrl</span> + <span class="kbd">F</span> to find a keyword.</p>
+      </div>
+      <div class="bd">
+        <div class="toc">
+          <a href="#sec-basics">1) Basics</a>
+          <a href="#sec-offer">2) Offer</a>
+          <a href="#sec-customers">3) Customers</a>
+          <a href="#sec-brand">4) Brand</a>
+          <a href="#sec-ops">5) Operations</a>
+          <a href="#sec-pricing">6) Pricing</a>
+          <a href="#sec-website">7) Website</a>
+          <a href="#sec-docs">8) Toolkit</a>
+          <a href="#sec-training">9) Training</a>
+          <a href="#sec-timeline">10) Timeline</a>
+          <a href="#sec-access">11) Access</a>
+        </div>
+
+        <p class="small">
+          <b>Privacy note:</b> This form does not auto-submit anywhere. It generates a package you can copy/email or download as JSON.
+        </p>
+
+        <p class="small">
+          <b>Pro move:</b> If you’re unsure on pricing/packages, write your best guess — we’ll refine it in kickoff.
+        </p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+
+<footer>
+  <div class="foot">
+    <div class="foot-left">
+      <div class="foot-brand">Biz’n’Box</div>
+      <div class="foot-sub">Complete intake → we build your blueprint, toolkit, training, and website requirements pack.</div>
+    </div>
+    <div class="foot-right">© 2026 AeroVista LLC</div>
+  </div>
+</footer>
+
+
+<script>
+  // --- helpers ---
+  function getValues(form){
+    const fd = new FormData(form);
+    const out = {};
+    // handle multi-select checkbox groups
+    const multi = new Set(["toolsUsed","siteGoals","toolkit","trainingFormat","access"]);
+    for (const [k,v] of fd.entries()){
+      if (multi.has(k)){
+        if (!out[k]) out[k] = [];
+        out[k].push(v);
+      } else {
+        // allow multiple same keys to become array if they appear anyway
+        if (out[k] !== undefined){
+          out[k] = Array.isArray(out[k]) ? out[k].concat([v]) : [out[k], v];
+        } else {
+          out[k] = v;
+        }
+      }
+    }
+    out._meta = {
+      generatedAt: new Date().toISOString(),
+      form: "biznbx_intake_v1"
+    };
+    return out;
+  }
+
+  function requiredValid(form){
+    const req = form.querySelectorAll("[required]");
+    for (const el of req){
+      if (!el.value || !String(el.value).trim()) return false;
+    }
+    return true;
+  }
+
+  function asEmailText(data){
+    // friendly, scannable format
+    const line = (s="") => s + "\n";
+    let t = "";
+    t += line("Subject: Biz’n’Box Intake — " + (data.businessName || "New Project"));
+    t += line("");
+    t += line("=== CONTACT ===");
+    t += line("Name: " + (data.name||""));
+    t += line("Email: " + (data.email||""));
+    t += line("Phone: " + (data.phone||""));
+    t += line("Timezone: " + (data.timezone||""));
+    t += line("");
+    t += line("=== BASICS ===");
+    t += line("Business/Brand: " + (data.businessName||""));
+    t += line("Stage: " + (data.stage||""));
+    t += line("Industry: " + (data.industry||""));
+    t += line("");
+    t += line("=== OFFER ===");
+    t += line(data.offerSummary||"");
+    t += line("");
+    t += line("Offer type: " + (data.offerTypes||""));
+    t += line("Delivery mode: " + (data.deliveryMode||""));
+    t += line("Packages/tiers: " + (data.packages||""));
+    t += line("Differentiator: " + (data.differentiator||""));
+    t += line("");
+    t += line("=== TARGET CUSTOMERS ===");
+    t += line(data.customerDesc||"");
+    t += line("");
+    t += line("Service area: " + (data.serviceArea||""));
+    t += line("Languages: " + (data.languages||""));
+    t += line("Objections: " + (data.objections||""));
+    t += line("Proof: " + (data.proof||""));
+    t += line("");
+    t += line("=== BRAND ===");
+    t += line("Tone: " + (data.brandTone||""));
+    t += line("Colors: " + (data.brandColors||""));
+    t += line("Logo status: " + (data.logoStatus||""));
+    t += line("Assets link: " + (data.assetsLink||""));
+    t += line("Examples: " + (data.examples||""));
+    t += line("");
+    t += line("=== OPERATIONS ===");
+    t += line("Current process: " + (data.currentProcess||""));
+    t += line("Ideal process: " + (data.idealProcess||""));
+    t += line("Tools used: " + ((data.toolsUsed||[]).join(", ")));
+    t += line("Team: " + (data.team||""));
+    t += line("Training audience: " + (data.trainingAudience||""));
+    t += line("");
+    t += line("=== PRICING & POLICIES ===");
+    t += line("Price range: " + (data.priceRange||""));
+    t += line("Payment methods: " + (data.paymentMethods||""));
+    t += line("Refunds/cancel: " + (data.refunds||""));
+    t += line("Legal needs: " + (data.legal||""));
+    t += line("");
+    t += line("=== WEBSITE ===");
+    t += line("Domain status: " + (data.domain||""));
+    t += line("Domain name: " + (data.domainName||""));
+    t += line("Pages/sections: " + (data.pagesNeeded||""));
+    t += line("Core goals: " + ((data.siteGoals||[]).join(", ")));
+    t += line("Integrations: " + (data.integrations||""));
+    t += line("Content readiness: " + (data.contentReady||""));
+    t += line("");
+    t += line("=== TOOLKIT REQUESTS ===");
+    t += line("Toolkit items: " + ((data.toolkit||[]).join(", ")));
+    t += line("Toolkit notes: " + (data.toolkitNotes||""));
+    t += line("");
+    t += line("=== TRAINING ===");
+    t += line("Preferred formats: " + ((data.trainingFormat||[]).join(", ")));
+    t += line("Topics: " + (data.trainingTopics||""));
+    t += line("");
+    t += line("=== TIMELINE & SUCCESS ===");
+    t += line("Launch date: " + (data.launchDate||""));
+    t += line("Budget: " + (data.budget||""));
+    t += line("Constraints: " + (data.constraints||""));
+    t += line("Success at 30 days: " + (data.success||""));
+    t += line("");
+    t += line("=== ACCESS & APPROVALS ===");
+    t += line("Accounts available: " + ((data.access||[]).join(", ")));
+    t += line("Approver: " + (data.approver||""));
+    t += line("Notes: " + (data.notes||""));
+    t += line("");
+    t += line("---");
+    t += line("Generated: " + (data._meta && data._meta.generatedAt ? data._meta.generatedAt : ""));
+    return t;
+  }
+
+  function download(filename, text, mime="text/plain"){
+    const blob = new Blob([text], {type: mime});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url), 1000);
+  }
+
+  function show(id){
+    const ok = document.getElementById("ok");
+    const warn = document.getElementById("warn");
+    if(ok) ok.style.display = (id==="ok") ? "block" : "none";
+    if(warn) warn.style.display = (id==="warn") ? "block" : "none";
+    if(id==="none"){ if(ok) ok.style.display="none"; if(warn) warn.style.display="none"; }
+  }
+
+  // --- actions ---
+  const form = document.getElementById("intake");
+
+  // --- prefill from URL (plan + addons) ---
+  const planSelect = document.getElementById("selectedPlan");
+  const addonsInput = document.getElementById("selectedAddons");
+  const planChip = document.getElementById("planChip");
+
+  const PLAN_DEFAULTS = {
+    "Lite": {
+      budget: "$1k–$3k",
+      toolkit: ["Client intake form","Proposal/quote template","Invoice template","Contract/terms template","Checklist (delivery)","SOPs (how to deliver)"],
+      siteGoals: ["Get leads"],
+      trainingFormat: ["Written SOPs","Checklists"],
+      pagesNeeded: "Home, Services, About, FAQ, Start Intake",
+      integrationsAppend: ""
+    },
+    "Core": {
+      budget: "$3k–$7k",
+      toolkit: ["Client intake form","Proposal/quote template","Invoice template","Contract/terms template","Checklist (delivery)","SOPs (how to deliver)","Email templates","Call scripts","Content calendar","KPI tracker","Onboarding checklist (team)"],
+      siteGoals: ["Get leads","Booking","Collect emails","Show portfolio"],
+      trainingFormat: ["Written SOPs","Checklists","Slide deck"],
+      pagesNeeded: "Home, Services, Pricing, About, FAQ, Start Intake",
+      integrationsAppend: "Email capture + basic analytics"
+    },
+    "Pro": {
+      budget: "$7k–$15k",
+      toolkit: ["Client intake form","Proposal/quote template","Invoice template","Contract/terms template","Checklist (delivery)","SOPs (how to deliver)","Email templates","Call scripts","Content calendar","KPI tracker","Onboarding checklist (team)"],
+      siteGoals: ["Get leads","Booking","Collect emails","Show portfolio","Sell online"],
+      trainingFormat: ["Written SOPs","Checklists","Slide deck","Short video scripts","Quizzes"],
+      pagesNeeded: "Home, Services, Pricing, About, FAQ, Resources, Start Intake",
+      integrationsAppend: "Email capture + analytics + automation-ready hooks"
+    }
+  };
+
+  const ADDON_MAP = {
+    "payments":  { integrations: "Payments (Square/Stripe)", siteGoals: ["Sell online"], toolkit: [] },
+    "booking":   { integrations: "Booking (Calendly / Square Appointments)", siteGoals: ["Booking"], toolkit: ["Client intake form"] },
+    "ecommerce": { integrations: "Ecommerce / Shop", siteGoals: ["Sell online"], toolkit: ["Invoice template"] },
+    "membership":{ integrations: "Membership / gated content", siteGoals: ["Sell online"], toolkit: [] },
+    "automation":{ integrations: "Automation (email + workflows)", siteGoals: ["Collect emails"], toolkit: ["Email templates"] },
+    "copy":      { integrations: "Copywriting / messaging support", siteGoals: [], toolkit: [] }
+  };
+
+  function setCheckboxGroup(name, values){
+    if(!values || !values.length) return;
+    const set = new Set(values);
+    document.querySelectorAll(`input[name="${name}"][type="checkbox"]`).forEach(cb => {
+      if(set.has(cb.value)) cb.checked = true;
+    });
+  }
+
+  function applyPlanDefaults(plan){
+    const d = PLAN_DEFAULTS[plan];
+    if(!d) return;
+
+    // budget
+    const budget = document.getElementById("budget");
+    if(budget && d.budget){
+      for(const opt of budget.options){
+        if(opt.textContent.trim() === d.budget){ budget.value = opt.textContent.trim(); break; }
+      }
+    }
+
+    // pagesNeeded
+    const pages = document.getElementById("pagesNeeded");
+    if(pages && d.pagesNeeded && !pages.value.trim()) pages.value = d.pagesNeeded;
+
+    // siteGoals/toolkit/trainingFormat defaults (do not uncheck existing)
+    setCheckboxGroup("siteGoals", d.siteGoals);
+    setCheckboxGroup("toolkit", d.toolkit);
+    setCheckboxGroup("trainingFormat", d.trainingFormat);
+
+    // integrations append (non-destructive)
+    const integ = document.getElementById("integrations");
+    if(integ && d.integrationsAppend){
+      const cur = (integ.value || "").trim();
+      if(!cur) integ.value = d.integrationsAppend;
+      else if(!cur.toLowerCase().includes(d.integrationsAppend.toLowerCase())) integ.value = cur + "\n" + d.integrationsAppend;
+    }
+  }
+
+  function applyAddons(addons){
+    const integ = document.getElementById("integrations");
+    const allSiteGoals = [];
+    const allToolkit = [];
+
+    addons.forEach(a => {
+      const m = ADDON_MAP[a];
+      if(!m) return;
+      if(m.siteGoals) allSiteGoals.push(...m.siteGoals);
+      if(m.toolkit) allToolkit.push(...m.toolkit);
+      if(integ && m.integrations){
+        const cur = (integ.value || "").trim();
+        if(!cur) integ.value = m.integrations;
+        else if(!cur.toLowerCase().includes(m.integrations.toLowerCase())) integ.value = cur + "\n" + m.integrations;
+      }
+    });
+
+    setCheckboxGroup("siteGoals", allSiteGoals);
+    setCheckboxGroup("toolkit", allToolkit);
+  }
+
+  function parseCommaList(s){
+    return (s||"")
+      .split(",")
+      .map(x => x.trim().toLowerCase())
+      .filter(Boolean);
+  }
+
+  function updatePlanChip(plan, addons){
+    if(!planChip) return;
+    const a = (addons && addons.length) ? ` • add-ons: ${addons.join(", ")}` : "";
+    planChip.textContent = plan ? `Plan: ${plan}${a}` : `Add-ons: ${addons.join(", ")}`;
+    planChip.style.display = (plan || (addons && addons.length)) ? "inline-flex" : "none";
+  }
+
+  (function prefillFromUrl(){
+    const sp = new URLSearchParams(window.location.search);
+    const plan = (sp.get("plan") || "").trim();
+    const budgetParam = (sp.get("budget") || "").trim();
+    const addons = parseCommaList(sp.get("addons") || "");
+
+    if(planSelect && plan){
+      planSelect.value = plan;
+      applyPlanDefaults(plan);
+    }
+    if(addonsInput && addons.length){
+      addonsInput.value = addons.join(", ");
+      applyAddons(addons);
+    }
+    if(budgetParam){
+      const budget = document.getElementById("budget");
+      if(budget){
+        for(const opt of budget.options){
+          if(opt.textContent.trim() === budgetParam){ budget.value = opt.textContent.trim(); break; }
+        }
+      }
+    }
+    updatePlanChip(plan, addons);
+  })();
+
+  // If user changes plan manually, apply defaults again (non-destructive)
+  if(planSelect){
+    planSelect.addEventListener("change", () => {
+      const plan = (planSelect.value || "").trim();
+      if(plan) applyPlanDefaults(plan);
+      const addons = parseCommaList((addonsInput && addonsInput.value) || "");
+      updatePlanChip(plan, addons);
+    });
+  }
+  if(addonsInput){
+    addonsInput.addEventListener("change", () => {
+      const addons = parseCommaList(addonsInput.value);
+      applyAddons(addons);
+      const plan = (planSelect && planSelect.value) ? planSelect.value.trim() : "";
+      updatePlanChip(plan, addons);
+    });
+  }
+
+  form.addEventListener("submit", (e)=>{
+    e.preventDefault();
+    show("none");
+    if(!requiredValid(form)){ show("warn"); return; }
+    const data = getValues(form);
+    // Default action = download both
+    const slug = (data.businessName || "biznbx").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");
+    download(`biznbx_intake__${slug}.json`, JSON.stringify(data, null, 2), "application/json");
+    download(`biznbx_intake__${slug}.txt`, asEmailText(data), "text/plain");
+    show("ok");
+  });
+if(!requiredValid(form)){ show("warn"); return; }
+    const data = getValues(form);
+    const text = asEmailText(data);
+    try{
+      await navigator.clipboard.writeText(text);
+      show("ok");
+    }catch(err){
+      // fallback
+      download("biznbx_intake_copy.txt", text, "text/plain");
+      show("ok");
+    }
+  });
+if(!requiredValid(form)){ show("warn"); return; }
+    const data = getValues(form);
+    const slug = (data.businessName || "biznbx").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");
+    download(`biznbx_intake__${slug}.json`, JSON.stringify(data, null, 2), "application/json");
+    show("ok");
+  });
+
+  // Update header plan chip from URL
+  (function(){
+    const params = new URLSearchParams(location.search);
+    const plan = params.get("plan") || "";
+    const chip = document.getElementById("planChip");
+    if(chip) chip.textContent = "Plan: " + (plan ? plan : "—");
+    if(plan) document.title = "Biz’n’Box Intake ("+plan+") | AeroVista";
+  })();
+
+</script>
+</body>
+</html>
