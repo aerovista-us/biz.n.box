@@ -824,7 +824,7 @@
           </ul>
 
           <div class="plan-cta">
-            <a class="btn btn-secondary" href="biznbx_customer_intake_form.v2.html" data-plan="Lite">Choose Lite</a>
+            <a class="btn btn-secondary" href="biznbx_customer_intake_form.html" data-plan="Lite">Choose Lite</a>
           </div>
         </div></div>
 
@@ -847,7 +847,7 @@
           </ul>
 
           <div class="plan-cta">
-            <a class="btn btn-primary" href="biznbx_customer_intake_form.v2.html" data-plan="Core">Choose Core</a>
+            <a class="btn btn-primary" href="biznbx_customer_intake_form.html" data-plan="Core">Choose Core</a>
             <span class="pill" title="Nice for launches where content changes quickly."><b>Best</b> for teams</span>
           </div>
         </div></div>
@@ -870,7 +870,7 @@
           </ul>
 
           <div class="plan-cta">
-            <a class="btn btn-secondary" href="biznbx_customer_intake_form.v2.html" data-plan="Pro">Choose Pro</a>
+            <a class="btn btn-secondary" href="biznbx_customer_intake_form.html" data-plan="Pro">Choose Pro</a>
           </div>
         </div></div>
       </div>
@@ -901,7 +901,7 @@
           <h3 class="cta-title">Ready to start?</h3>
           <p>Pick a plan, then fill out one intake form. We’ll turn that into your blueprint, toolkit, training, and website build.</p>
         </div>
-        <a class="btn btn-primary" href="biznbx_customer_intake_form.v2.html">Start Intake</a>
+        <a class="btn btn-primary" href="biznbx_customer_intake_form.html">Start Intake</a>
       </div>
     </section>
 
@@ -1042,6 +1042,7 @@
       }
 
       // Plan selection -> go to intake form (carry selections via query params)
+      const INTAKE_FILE = 'biznbx_customer_intake_form.html';
       const planLinks = document.querySelectorAll('[data-plan]');
       const addonChecks = Array.from(document.querySelectorAll('.addon'));
 
@@ -1056,7 +1057,7 @@
       }
 
       function buildUrl(plan){
-        const url = new URL(planLinks[0]?.getAttribute('href') || 'biznbx_customer_intake_form.v2.html', window.location.href);
+        const url = new URL(planLinks[0]?.getAttribute('href') || INTAKE_FILE, window.location.href);
         if(plan) url.searchParams.set('plan', plan);
 
         // merge selected addons + plan defaults (without duplicates)
@@ -1080,7 +1081,7 @@
       });
 
       // global "Start Intake" links (no plan) should still carry addons if selected
-      document.querySelectorAll('a[href= + INTAKE_FILE + ]').forEach(a => {
+      document.querySelectorAll('a[href="' + INTAKE_FILE + '"]').forEach(a => {
         if(a.hasAttribute('data-plan')) return;
         a.addEventListener('click', (e) => {
           // allow normal if already has query
@@ -1092,11 +1093,7 @@
           window.location.href = url.toString();
         });
       });
-
-
-      });
-
-      })();
+    })();
   </script>
 
   <style>
